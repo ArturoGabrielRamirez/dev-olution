@@ -7,7 +7,6 @@ export default async function Home() {
     <section className="flex flex-col gap-4">
       <h3 className="text-2xl">Home</h3>
       <div>
-
         <Form />
       </div>
 

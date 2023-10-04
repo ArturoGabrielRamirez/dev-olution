@@ -1,6 +1,23 @@
 import clientPromise from "@/auth/adapter";
 import { NextResponse } from "next/server";
 
+
+export async function GET(request: Request) {
+
+    const client = await clientPromise;
+    const db = client.db();
+
+    const usersCursor = await db.collection('users').find({});
+    const users = await usersCursor.toArray();
+    
+    if (!users || users.length === 0) {
+        return NextResponse.json({ error: 'Usuarios no encontrado' }, { status: 404 });
+    }
+
+    return NextResponse.json(users)
+}
+
+
 export async function POST(request: Request) {
     const client = await clientPromise;
     const db = client.db();
